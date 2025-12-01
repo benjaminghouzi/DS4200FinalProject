@@ -152,41 +152,87 @@
         </tbody>
       </table>
     </div>
-    <p>
-      Meanwhile, we also believe that the geographical information is important
-      when evaluating the unemployment rate. Therefore, we also make use of
-      geographical information on
-      <a href="https://www.naturalearthdata.com/downloads/">Natural Earth</a>.
-      The website provides the geographical information for making maps for US
-      states.
-    </p>
+
+    <h3>Data Visualization</h3>
 
     <p>
-      To make a better data visualization, we remove the Alaska and Hawaii from
-      the data. Following is an interactive map for the lower 48 states in US.
-      User can zoom in the map. The color indicates the unemployment rate for
-      each state. When click any state, other social factors will be revealed
-      for the state.
+      In the following sections, we walk through a series of visualizations that
+      build on each other to tell a story about how coffee is purchased over
+      time. We begin with a broad view of sales across the year, then look at
+      which products drive those sales, how much customers typically spend, and
+      finally how preferences vary by time of day.
+    </p>
+
+    <h3>1. Coffee Sales Over Time by Type</h3>
+
+    <p>
+      We start with a high-level view of how coffee sales evolve over time. This
+      line chart shows daily total sales, broken down by coffee type, so we can
+      see both overall trends and differences between individual drinks.
     </p>
 
     <div class="center">
-      <iframe src="d3.html" width="80%" height="400px" frameborder="0"></iframe>
+      <iframe
+        src="coffee_sales_over_time.html"
+        width="100%"
+        height="513px"
+        frameborder="0"
+      ></iframe>
     </div>
 
     <p>
-      In general, west coast states tend to have higher unemployment rate. On
-      the east coast, West virginia and New York state tend to have higher
-      unemplyment rate than the others. In the south, Mississippi and Louisiana
-      are the ones with the much higher unemplyment rate.
+      This visualization tracks individual coffee sales transactions across
+      eight different beverage types over 15 months from March 2024 through
+      March 2025, using a lollipop chart where each colored dot represents a
+      single sale. Latte (gray) and Americano with Milk (orange) consistently
+      generate the highest-value transactions, with some sales exceeding 300,
+      while specialty drinks like Hot Chocolate and Cocoa typically stay under
+      150. A dramatic sales gap appears between August and September 2024,
+      followed by recovery in October, and Americano (blue) shows notably
+      increased activity in February-March 2025. The overlapping data points
+      reveal that multiple coffee types generate sales simultaneously throughout
+      most periods, with Cappuccino, Latte, and Americano with Milk maintaining
+      the most consistent presence as core menu items. This granular view allows
+      stakeholders to identify both typical purchasing patterns and exceptional
+      high-value transactions across all product categories.
+    </p>
+    <p>
+      This visualization strategically employs marks and channels with point
+      marks (dots) and line marks (stems) to create lollipops, using position on
+      both axes as the primary quantitative channel—vertical position encodes
+      sales amount (which humans perceive with high accuracy) while horizontal
+      position encodes time sequentially. Color hue serves as the categorical
+      channel to distinguish eight coffee types (blue for Americano, orange for
+      Americano with Milk, green for Cappuccino, etc.), with sufficient
+      perceptual separability maintained even when points overlap, and a
+      comprehensive legend provides the decoding reference system. I chose
+      lollipops over bar or line charts because the stem-and-dot structure
+      maintains optimal data-ink ratio and reduces visual clutter with hundreds
+      of overlapping points, while the Gestalt principle of connection links
+      each value to its zero baseline to reinforce quantitative relationships.
+      The customized axis extends from $0-$350 with gridlines for reference,
+      prioritizing transparency and expressiveness by showing individual
+      transactions rather than aggregated statistics, which enables stakeholders
+      to understand sales variability, identify outliers, and recognize temporal
+      patterns essential for inventory and staffing decisions.
     </p>
 
-    <h3>Overview of the Unemployment rate</h3>
-
+    <p>
+      Having seen how sales change over time for each coffee type, we next turn
+      to the overall mix of products to understand which drinks make up the bulk
+      of sales across the entire period.
+    </p>
+    <h3>2. Coffee Type Share of Total Sales</h3>
+    <p>
+      This visualization summarizes the relative contribution of each coffee
+      type to total sales. Instead of focusing on specific dates, it answers the
+      question: <em>Which drinks matter most overall?</em>
+    </p>
     <div class="container">
       <div class="image">
         <!-- <iframe src="histogram/index.html" width="100%" height="400px" frameborder="0"></iframe>-->
         <iframe
-          src="histogram.png"
+          src="coffee_pie.html"
           width="100%"
           height="400px"
           frameborder="0"
@@ -211,76 +257,168 @@
         </p>
       </div>
     </div>
+    <p>
+      Once we know which drinks are most popular, it is also important to
+      understand how much customers typically spend on a single coffee purchase.
+      The next visualization looks at the distribution of those amounts.
+    </p>
 
-    <h3>The relationship between unemployment rate and other social factors</h3>
+    <h3>3. Distribution of Transaction Amounts</h3>
+
+    <p>
+      This histogram shows how much money customers usually spend per
+      transaction. It highlights common price points and reveals whether most
+      purchases cluster around a narrow range or are spread out over many
+      different amounts.
+    </p>
 
     <div class="container">
+      <!-- LEFT: text -->
       <div class="text">
         <p>
-          Moreover, we also want to examine the relationship between
-          unemployment rate and other social factors in the data. All features
-          are numerical thus we firts create a correlation plot to examine
-          whether there are linear relationship between unemployment rate with
-          other social factors. Notice that if the correlation is small, it only
-          means that there is no potential linear relationship between two
-          features.
+          <strong>Main takeaway.</strong>
+          The histogram reveals a bimodal distribution of coffee prices in the
+          dataset, with two distinct peaks around $25–27 and $34–37. This
+          suggests the coffee shop likely offers two main pricing tiers—perhaps
+          regular-sized drinks at the lower price point and premium or larger
+          sizes at the higher tier. The gap between these peaks indicates clear
+          price segmentation rather than a continuous spectrum, which is typical
+          of menu-based pricing strategies. Understanding this distribution
+          helps contextualize revenue patterns and customer purchasing behavior.
         </p>
+
         <p>
-          Based on the correlation plot, among all the features, poverty has the
-          strongest correlation with the unemployment rate since they are both
-          related to the economics. The percentage of single parents is the
-          second important feature which inidicates the stability of family is
-          also strongly related to the job market. The increase of unemployment
-          rate may also related to the increase of violent crime and murder rate
-          but has a negative relationship with education indicators, like the
-          percentage of people who go to high school and college. The only
-          variable that has no direct linear relation with the unemployment rate
-          is Metropolitan, which means the percent of residents living in a
-          metropolitan area.
+          <strong>Design notes.</strong>
+          A histogram is the most appropriate choice for displaying the
+          distribution of a continuous numerical variable like price. The bin
+          width is set to capture meaningful price ranges while revealing the
+          bimodal pattern without over-smoothing or creating excessive noise.
+          The simple blue color scheme keeps focus on the shape of the
+          distribution itself rather than introducing unnecessary visual
+          complexity. The frequency scale on the y-axis provides clear
+          quantitative information about how many transactions fall into each
+          price range.
         </p>
       </div>
-      <div class="center">
-        <iframe
-          src="coffee_pie.html"
-          width="100%"
-          height="500px"
-          frameborder="0"
-        ></iframe>
+
+      <!-- RIGHT: image -->
+      <div class="image">
+        <img
+          src="histogram.png"
+          alt="Histogram of transaction amounts"
+          style="max-width: 100%; height: auto"
+        />
       </div>
     </div>
 
     <p>
-      We have also create an interactive scatter plot so that our users can
-      select a couple of states within a certain range of unemployment rate and
-      to see how the other factors may be related here.
+      So far, we have focused on overall patterns and typical spending levels.
+      Next, we combine the time and spending perspectives by looking more
+      closely at how total daily spending changes and allowing viewers to zoom
+      into specific periods.
     </p>
-
-    <div class="center">
-      <iframe
-        src="coffee_sales_over_time.html"
-        width="85%"
-        height="550px"
-        frameborder="0"
-      ></iframe>
-    </div>
-
-    <h3>Compare MA to the other states</h3>
-
+    <h3>4. Zoomable Daily Coffee Spending</h3>
     <p>
-      Since we are in MA, thus we want to take a closer look between MA and
-      other states. We create the following interactive plot such that user can
-      choose another state to compare with MA and show the bar plot on each
-      factors.
+      This interactive bar chart shows total spending for each day. The lower
+      panel provides an overview of the full time range, while the upper panel
+      zooms into a selected window. This makes it easier to investigate
+      short-term spikes or quieter periods that might be hidden in a static
+      view.
     </p>
-
     <div class="center">
       <iframe
         src="daily_spending_interactive.html"
-        width="95%"
-        height="300px"
+        width="100%"
+        height="661px"
         frameborder="0"
       ></iframe>
     </div>
+
+    <p>
+      This visualization displays daily total coffee spending over a 15-month
+      period from March 2024 through March 2025, with each bar representing the
+      aggregate sales for a single day. The data reveals significant day-to-day
+      variability in spending, with daily totals ranging from approximately 100
+      on slower days to peaks exceeding $800 in mid-October 2024 and late
+      February 2025. A clear upward trend emerges in the fall months
+      (September-November 2024), where sustained higher spending levels suggest
+      increased customer traffic or higher-value purchases, followed by a
+      decline in December 2024 and January 2025, likely reflecting seasonal
+      patterns or holiday closures. The interactive overview panel below the
+      main chart provides context by showing the entire dataset at a compressed
+      scale, allowing users to click and drag to zoom into specific time periods
+      for detailed analysis. This dual-view design enables both macro-level
+      pattern recognition (identifying seasonal trends and growth periods) and
+      micro-level investigation (examining specific days or weeks of interest).
+    </p>
+
+    <p>
+      This visualization employs a bar chart with area marks to represent daily
+      spending totals, using vertical position as the primary quantitative
+      channel encoding dollar amounts and horizontal position encoding time
+      sequentially across the x-axis. The color channel uses a single blue hue
+      with subtle gradient shading to create visual cohesion while the varying
+      bar heights leverage length as an anditional quantitative channel, which
+      humans perceive accurately for magnitude comparisons. I customized the
+      layout to include an interactive overview + detail design pattern with two
+      coordinated views: the main chart shows the full resolution data with
+      gridlines for precise value reading, while the compressed overview panel
+      below enables navigation through the dataset via click-and-drag zooming,
+      addressing the challenge of displaying 450+ days of data in a readable
+      format. The bar chart format was chosen over line charts or point-based
+      visualizations because it emphasizes the discrete nature of daily totals
+      and uses the Gestalt principle of enclosure to clearly show each day's
+      contribution to overall revenue, with bars extending from a zero baseline
+      to maintain accurate magnitude perception and avoid misleading visual
+      comparisons. This design prioritizes both effectiveness (accurate
+      quantitative comparison) and interactivity (user-controlled exploration),
+      enabling stakeholders to identify revenue trends, investigate anomalies
+      like the October peak, and make data-driven decisions about staffing,
+      inventory, and business strategy.
+    </p>
+
+    <p>
+      Finally, beyond when and how much people spend, we are also interested in
+      <em>when</em> during the day different drinks are most popular. Our last
+      visualization looks at the flow from time-of-day categories to specific
+      coffee types.
+    </p>
+
+    <h3>5. Time of Day to Coffee Type Flow</h3>
+
+    <p>
+      This Sankey diagram shows how total spending flows from time-of-day
+      categories (such as Morning, Afternoon, or Evening) to individual coffee
+      types. It helps answer questions like:
+      <em>Which drinks dominate in the morning?</em> and
+      <em>Do preferences shift later in the day?</em>
+    </p>
+
+    <div class="center">
+      <iframe src="d3.html" width="95%" height="300px" frameborder="0"></iframe>
+    </div>
+    <p>
+      This visualization reveals the relationship between when customers buy
+      coffee and what types they purchase, with the flow thickness representing
+      revenue rather than transaction count. By tracking money flows from
+      different times of day to specific coffee products, we can identify peak
+      revenue periods and the most profitable coffee-time combinations. This
+      helps answer questions like "Which coffees drive morning revenue?" or
+      "What do afternoon customers prefer?" The interactive tooltips provide
+      exact dollar amounts for each connection, making it easy to quantify these
+      patterns.
+    </p>
+    <p>
+      The Sankey diagram format naturally represents flow and proportion, making
+      it ideal for showing how revenue "flows" from temporal categories to
+      product categories. The left-to-right orientation follows a logical
+      temporal progression, with time periods on the left feeding into coffee
+      types on the right. Interactive hover states and tooltips add depth to the
+      visualization without cluttering the main display, allowing users to
+      explore specific connections on demand. The color coding by source time
+      period helps visually trace flows across the diagram while maintaining
+      clarity.
+    </p>
 
     <h3>Summary and additional work</h3>
 
