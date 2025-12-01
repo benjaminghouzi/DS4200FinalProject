@@ -1,285 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Understanding Coffee Sales at Different Times</title>
     <link href="style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <h1>Understanding Coffee Sales at Different Times</h1>
+</head>
+<body>
+    
+    <h1> Understanding Coffee Sales at Different Times </h1>
 
     <h3>Overall Introduction</h3>
 
-    <p>
-      Our project will visualize trends in coffee sales depending on the time of
-      day and the time of year of the sale. Our dataset includes data on many
-      coffee sales, such as the name of the coffee, the amount of money spent on
-      the coffee, and the payment method for the coffee. Each coffee sale is
-      also tracked with copious amounts of timestamp data, such as the time of
-      day, day, day of week, month, and year. Furthermore, the timestamp data is
-      listed both as categorical features and numerical features, which allows
-      for the creation of different types of visualizations that can aid users’
-      understanding of our report. This topic is important to study and
-      elucidate since the coffee market represents one of the largest consumer
-      goods markets and is only growing. Data published by Grand View Research
-      estimates the annual coffee market in 2025 to be 284.8 billion dollars,
-      with it growing to nearly 370 billion dollars by the end of the decade.
-      Creating a good report analyzing coffee sales, with appealing and
-      easy-to-understand visualization, will help coffee businesses and
-      consumers better understand this growing and expansive market.
-    </p>
+    <p>Our project will visualize trends in coffee sales depending on the time of day and the time of year of the sale. Our dataset includes data on many coffee sales, such as the name of the coffee, the amount of money spent on the coffee, and the payment method for the coffee. Each coffee sale is also tracked with copious amounts of timestamp data, such as the time of day, day, day of week, month, and year. Furthermore, the timestamp data is listed both as categorical features and numerical features, which allows for the creation of different types of visualizations that can aid users’ understanding of our report. This topic is important to study and elucidate since the coffee market represents one of the largest consumer goods markets and is only growing. Data published by Grand View Research estimates the annual coffee market in 2025 to be 284.8 billion dollars, with it growing to nearly 370 billion dollars by the end of the decade. Creating a good report analyzing coffee sales, with appealing and easy-to-understand visualization, will help coffee businesses and consumers better understand this growing and expansive market. </p>
 
-    <p>
-      To learn more about the US unemployment rate and its implications, you can
-      visit the
-      <a href="https://www.bls.gov/">Bureau of Labor Statistics website</a> or
-      explore analysis reports from reputable research organizations like
-      <a href="https://www.pewresearch.org/">Pew Research Center</a>.
-    </p>
+
+    <p>To learn more about the US unemployment rate and its implications,
+         you can visit the <a href="https://www.bls.gov/">Bureau of Labor Statistics website</a> or explore 
+         analysis reports from reputable research organizations like 
+         <a href="https://www.pewresearch.org/">Pew Research Center</a>.</p>
 
     <h3>Introduction to the data</h3>
 
-    <p>
-      The dataset was sourced from Kaggle. It contains 3,547 rows and 11 columns
-      of transaction records from a coffee shop, providing a sufficient sample
-      size for meaningful analysis while still being manageable. The dataset
-      covers sales from March 1, 2024, to March 23, 2025, and includes details
-      such as time of purchase (Date, Time, Hour of Day), product type (coffee
-      name), payment method (cash or card), and transaction amount.
-    </p>
+     <p>The dataset was sourced from Kaggle. It contains 3,547 rows and 11 columns of transaction records from a coffee shop, providing a sufficient sample size for meaningful analysis while still being manageable. The dataset covers sales from March 1, 2024, to March 23, 2025, and includes details such as time of purchase (Date, Time, Hour of Day), product type (coffee name), payment method (cash or card), and transaction amount. </p>
+     
+     <p> These features include both categorical and numerical data, making it suitable for analyzing sales patterns. With structured temporal features like Date and Time, the dataset also makes it possible to explore consumer purchasing patterns across different periods, products, and days, and to conduct time-series or trend analysis. </p>
 
-    <p>
-      These features include both categorical and numerical data, making it
-      suitable for analyzing sales patterns. With structured temporal features
-      like Date and Time, the dataset also makes it possible to explore consumer
-      purchasing patterns across different periods, products, and days, and to
-      conduct time-series or trend analysis.
-    </p>
+    <p>The detail information about the features are listed in the following table:</p>  
 
-    <p>
-      The detail information about the features are listed in the following
-      table:
-    </p>
-
-    <div class="center">
-      <table class="tg">
-        <thead>
-          <tr>
-            <th class="tg-0lax">Variable Name</th>
-            <th class="tg-0lax">Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="tg-0lax">hour_of_day</td>
-            <td class="tg-0lax">
-              Hour of the day when the transaction occurred (0–23)
-            </td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">cash_type</td>
-            <td class="tg-0lax">
-              Payment type used by the customer (e.g., cash, card)
-            </td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">money</td>
-            <td class="tg-0lax">Total amount paid for the transaction</td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">coffee_name</td>
-            <td class="tg-0lax">Name of the coffee product purchased</td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">Time_of_Day</td>
-            <td class="tg-0lax">
-              Time-of-day category for the transaction (e.g., Morning,
-              Afternoon)
-            </td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">Weekday</td>
-            <td class="tg-0lax">
-              Day of the week of the transaction (e.g., Mon, Tue)
-            </td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">Month_name</td>
-            <td class="tg-0lax">
-              Name of the month in which the transaction occurred
-            </td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">Weekdaysort</td>
-            <td class="tg-0lax">
-              Numeric sort index for day of week (to enable correct ordering)
-            </td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">Monthsort</td>
-            <td class="tg-0lax">
-              Numeric sort index for month (to enable correct ordering)
-            </td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">Date</td>
-            <td class="tg-0lax">Calendar date of the transaction</td>
-          </tr>
-          <tr>
-            <td class="tg-0lax">Time</td>
-            <td class="tg-0lax">Exact timestamp of the transaction</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p>
-      Meanwhile, we also believe that the geographical information is important
-      when evaluating the unemployment rate. Therefore, we also make use of
-      geographical information on
-      <a href="https://www.naturalearthdata.com/downloads/">Natural Earth</a>.
-      The website provides the geographical information for making maps for US
-      states.
-    </p>
-
-    <p>
-      To make a better data visualization, we remove the Alaska and Hawaii from
-      the data. Following is an interactive map for the lower 48 states in US.
-      User can zoom in the map. The color indicates the unemployment rate for
-      each state. When click any state, other social factors will be revealed
-      for the state.
-    </p>
-
-    <div class="center">
-      <iframe src="d3.html" width="80%" height="400px" frameborder="0"></iframe>
-    </div>
-
-    <p>
-      In general, west coast states tend to have higher unemployment rate. On
-      the east coast, West virginia and New York state tend to have higher
-      unemplyment rate than the others. In the south, Mississippi and Louisiana
-      are the ones with the much higher unemplyment rate.
-    </p>
-
-    <h3>Overview of the Unemployment rate</h3>
-
-    <div class="container">
-      <div class="image">
-        <!-- <iframe src="histogram/index.html" width="100%" height="400px" frameborder="0"></iframe>-->
-        <iframe
-          src="histogram.png"
-          width="100%"
-          height="400px"
-          frameborder="0"
-        ></iframe>
-      </div>
-      <div class="text">
-        <p>
-          First, we present an overview of the unemployment rate for all 50
-          states. Alaska is the one with the highest unemployment rate, which
-          may due to the seasonal business in the state. The effectiveness of
-          labor market policies and governance structures can influence
-          unemployment rates. Washington, D.C., being the seat of government,
-          may experience fluctuations in employment related to government
-          spending and policies. Mississippi and Louisiana have economies that
-          are heavily reliant on sectors such as agriculture, manufacturing, and
-          energy. Economic downturns or fluctuations in these industries can
-          impact employment opportunities. Connecticut, South Dakota and
-          Virginia have the lowest unemplyment rate. These states often have
-          diverse economies with strong sectors such as technology, healthcare,
-          finance, and tourism. A diverse economy can provide more resilience to
-          economic downturns.
+        <div class="center">
+        <table class="tg">
+            <thead>
+              <tr>
+                <th class="tg-0lax">Variable Name</th>
+                <th class="tg-0lax">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-0lax">hour_of_day</td>
+                <td class="tg-0lax">Hour of the day when the transaction occurred (0–23)</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">cash_type</td>
+                <td class="tg-0lax">Payment type used by the customer (e.g., cash, card)</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">money</td>
+                <td class="tg-0lax">Total amount paid for the transaction</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">coffee_name</td>
+                <td class="tg-0lax">Name of the coffee product purchased</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">Time_of_Day</td>
+                <td class="tg-0lax">Time-of-day category for the transaction (e.g., Morning, Afternoon)</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">Weekday</td>
+                <td class="tg-0lax">Day of the week of the transaction (e.g., Mon, Tue)</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">Month_name</td>
+                <td class="tg-0lax">Name of the month in which the transaction occurred</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">Weekdaysort</td>
+                <td class="tg-0lax">Numeric sort index for day of week (to enable correct ordering)</td>
+              </tr>
+               <tr>
+                <td class="tg-0lax">Monthsort</td>
+                <td class="tg-0lax">Numeric sort index for month (to enable correct ordering)</td>
+              </tr>
+               <tr>
+                <td class="tg-0lax">Date</td>
+                <td class="tg-0lax">Calendar date of the transaction</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">Time</td>
+                <td class="tg-0lax">Exact timestamp of the transaction</td>
+              </tr>
+            </tbody>
+            </table>
+        </div>
+        <p>Meanwhile, we also believe that the geographical 
+            information is important when evaluating the unemployment
+            rate. Therefore, we also make use of geographical information 
+            on <a href="https://www.naturalearthdata.com/downloads/">Natural Earth</a>. 
+            The website provides the geographical information for making maps for US states. 
         </p>
-      </div>
-    </div>
 
-    <h3>The relationship between unemployment rate and other social factors</h3>
+        <p>To make a better data visualization, we remove the Alaska and Hawaii
+            from the data. Following is an interactive map for the 
+            lower 48 states in US. User can zoom in the map. The color
+            indicates the unemployment rate for each state. When click any 
+            state, other social factors will be revealed for the state. </p>
 
-    <div class="container">
-      <div class="text">
+            <div class = 'center'>
+                <iframe src="d3.html" width="80%" height="400px" frameborder="0"></iframe>
+            </div>
+            
+            <p>In general, west coast states tend to have higher 
+                unemployment rate. On the east coast, West virginia 
+                and New York state tend to have higher unemplyment rate
+                than the others. In the south, Mississippi and Louisiana
+                are the ones with the much higher unemplyment rate.
+            </p>
+
+        <h3>Overview of the Unemployment rate</h3>
+        
+        <div class = 'container'>
+            <div class = 'image'>
+                <!-- <iframe src="histogram/index.html" width="100%" height="400px" frameborder="0"></iframe>-->
+                <iframe src="histogram.png" width="100%" height="400px" frameborder="0"></iframe>
+            </div>
+            <div class = 'text'>
+                <p> First, we present an overview of the unemployment rate
+                    for all 50 states. Alaska is the one with the 
+                    highest unemployment rate, which may due to the seasonal 
+                    business in the state. The effectiveness of labor market 
+                    policies and governance structures can influence unemployment 
+                    rates. Washington, D.C., being the seat of government, may 
+                    experience fluctuations in employment related to government 
+                    spending and policies. Mississippi and Louisiana have economies 
+                    that are heavily reliant on sectors such as agriculture, 
+                    manufacturing, and energy. Economic downturns or fluctuations 
+                    in these industries can impact employment opportunities. 
+                    Connecticut, South Dakota and Virginia have the lowest 
+                    unemplyment rate. These states often have diverse economies 
+                    with strong sectors such as technology, healthcare, finance, 
+                    and tourism. A diverse economy can provide more resilience to 
+                    economic downturns.
+                </p>
+            </div>            
+        </div>
+        
+        <h3> The relationship between unemployment rate and other social factors</h3>
+
+        <div class = 'container'>
+            <div class = 'text'>
+                <p>Moreover, we also want to examine the relationship between
+                    unemployment rate and other social factors in the data. All 
+                    features are numerical thus we firts create a correlation
+                    plot to examine whether there are linear relationship between 
+                    unemployment rate with other social factors. Notice that if 
+                    the correlation is small, it only means that there is no potential
+                    linear relationship between two features. 
+                </p>
+                <p>
+                    Based on the correlation plot, among all the features, poverty 
+                    has the strongest correlation with the unemployment rate since
+                    they are both related to the economics. The percentage of single 
+                    parents is the second important feature which inidicates the 
+                    stability of family is also strongly related to the job market. 
+                    The increase of unemployment rate may also related to the increase 
+                    of violent crime and murder rate but has a negative relationship
+                    with education indicators, like the percentage of people who go to
+                    high school and college. The only variable that has no direct linear
+                    relation with the unemployment rate is Metropolitan, which means the 
+                    percent of residents living in a metropolitan area. 
+                </p>
+            </div>
+            <div class = 'image'>
+                <img src="correlation_plot.png" width="100%" height="500px" frameborder="0"></img>
+            </div>   
+        </div>
+
+        <p>We have also create an interactive scatter plot so that 
+            our users can select a couple of states within
+            a certain range of unemployment rate and to see how the 
+            other factors may be related here. 
+        </p>
+
+        <div class = 'center'>
+            <iframe src="coffee_sales_over_time.html" width="85%" height="550px" frameborder="0"></iframe>
+        </div>
+
+        <h3>Compare MA to the other states</h3>
+
         <p>
-          Moreover, we also want to examine the relationship between
-          unemployment rate and other social factors in the data. All features
-          are numerical thus we firts create a correlation plot to examine
-          whether there are linear relationship between unemployment rate with
-          other social factors. Notice that if the correlation is small, it only
-          means that there is no potential linear relationship between two
-          features.
+            Since we are in MA, thus we want to take a closer look between
+            MA and other states. We create the following interactive plot
+            such that user can choose another state to compare with MA and 
+            show the bar plot on each factors. 
+        </p>
+
+        <div class = 'center'>
+            <iframe src="daily_spending_interactive.html" width="95%" height="300px" frameborder="0"></iframe>
+        </div>
+
+        <h3>Summary and additional work</h3>
+
+        <p>
+            In this visualization analysis, we try to explore the US 
+            unemployment rate across states. We also examine the relation
+            between unemployment rate and other social factors. 
         </p>
         <p>
-          Based on the correlation plot, among all the features, poverty has the
-          strongest correlation with the unemployment rate since they are both
-          related to the economics. The percentage of single parents is the
-          second important feature which inidicates the stability of family is
-          also strongly related to the job market. The increase of unemployment
-          rate may also related to the increase of violent crime and murder rate
-          but has a negative relationship with education indicators, like the
-          percentage of people who go to high school and college. The only
-          variable that has no direct linear relation with the unemployment rate
-          is Metropolitan, which means the percent of residents living in a
-          metropolitan area.
+            Unfortunately, this is the 2010 data thus may be different 
+            than the current economics status. Also, unemployment rate 
+            may fluctuate seasonally thus adding a time series analysis
+            will be more informative. 
         </p>
-      </div>
-      <div class="center">
-        <iframe
-          src="interactive_coffee_sales.html"
-          width="100%"
-          height="500px"
-          frameborder="0"
-        ></iframe>
-      </div>
-    </div>
 
-    <p>
-      We have also create an interactive scatter plot so that our users can
-      select a couple of states within a certain range of unemployment rate and
-      to see how the other factors may be related here.
-    </p>
+        <p>If you are interested in the project and want to share more
+            opinions or resource about the project, please contact:
+            Xiaoyi Yang (xiaoy.yang@northeastern.edu)
+        </p>
 
-    <div class="center">
-      <iframe
-        src="coffee_sales_over_time.html"
-        width="85%"
-        height="550px"
-        frameborder="0"
-      ></iframe>
-    </div>
-
-    <h3>Compare MA to the other states</h3>
-
-    <p>
-      Since we are in MA, thus we want to take a closer look between MA and
-      other states. We create the following interactive plot such that user can
-      choose another state to compare with MA and show the bar plot on each
-      factors.
-    </p>
-
-    <div class="center">
-      <iframe
-        src="daily_spending_interactive.html"
-        width="95%"
-        height="300px"
-        frameborder="0"
-      ></iframe>
-    </div>
-
-    <h3>Summary and additional work</h3>
-
-    <p>
-      In this visualization analysis, we try to explore the US unemployment rate
-      across states. We also examine the relation between unemployment rate and
-      other social factors.
-    </p>
-    <p>
-      Unfortunately, this is the 2010 data thus may be different than the
-      current economics status. Also, unemployment rate may fluctuate seasonally
-      thus adding a time series analysis will be more informative.
-    </p>
-
-    <p>
-      If you are interested in the project and want to share more opinions or
-      resource about the project, please contact: Xiaoyi Yang
-      (xiaoy.yang@northeastern.edu)
-    </p>
-  </body>
+</body>
 </html>
